@@ -11,6 +11,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavAction
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.test.databinding.FragmentABinding
 
@@ -23,6 +25,17 @@ class AFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentABinding = DataBindingUtil.inflate(inflater , R.layout.fragment_a, container, false)
 
+        binding.btnOk.setOnClickListener() {
+            val personName: String = binding.tfName.text.toString()
+
+           // val bundle = bundleOf(Pair("name", personName))
+
+           // Navigation.findNavController(it).navigate(R.id.action_AFragment_to_BFragment)
+
+            val action : NavDirections = AFragmentDirections.actionAFragmentToBFragment(personName)
+
+            Navigation.findNavController(it).navigate(action)
+        }
 
         return binding.root
     }
